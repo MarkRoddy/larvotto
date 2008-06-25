@@ -1,0 +1,5 @@
+#!/usr/bin/python
+
+from larvotto.commmandline import main
+
+main()
