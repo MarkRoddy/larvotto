@@ -1,15 +1,15 @@
-
+"""Unit tests for the L{larvotto.bot} module"""
 
 import unittest
-import larvotto.bot
+import larvotto.response
+from larvotto.bot import MarkovBot
 
 class TestMarkovBot(unittest.TestCase):
 
 
 
     def setUp(self):
-		pass
-		#self.bot=larvotto.bot.MarkovBot('foo','bar',None)
+		self.bot=MarkovBot('foo','bar',larvotto.response.Echo())
 
 
     def testInit(self):
