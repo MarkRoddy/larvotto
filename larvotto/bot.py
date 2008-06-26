@@ -19,3 +19,7 @@ class MarkovBot(TocTalk):
 		TocTalk.__init__(self,scnname,passwd)
 		self._resp=response
 
+
+	def on_IM_IN(self,data):
+		#Override base class method
+		self.do_SEND_IM(self._resp.get(*date.split(':')))
