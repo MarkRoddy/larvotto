@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
-from larvotto.commmandline import main
+import sys,os
+if os.path.exists(os.path.join(sys.path[0], 'larvotto.py')):
+	 del sys.path[0]
+
+from larvotto.commandline import main
 
 main()
