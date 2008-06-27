@@ -1,8 +1,8 @@
 """Implements the instant messager bot that handles communication"""
 
-from toc import TocTalk
+from toc import TocTalk,BotManager
 import larvotto.response
-
+import time
 
 class MarkovBot(TocTalk):
 	"""Handles all IM connection issues"""
@@ -23,3 +23,12 @@ class MarkovBot(TocTalk):
 	def on_IM_IN(self,data):
 		#Override base class method
 		self.do_SEND_IM(self._resp.get(*date.split(':')))
+
+
+def Start(ScreenName,Passwd,ResponseObj):
+	"""Starts the bot"""
+	b=MarkovBot(ScreenName,Passwd,ResponseObj)
+	bm=BotManager()
+	bm.addBot(b,"MarkovBot")
+	time.sleep(4)  # time to login
+	b.go()
