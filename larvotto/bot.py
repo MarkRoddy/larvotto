@@ -1,34 +1,39 @@
 """Implements the instant messager bot that handles communication"""
 
-from toc import TocTalk,BotManager
+
+from twisted.words.protocols import toc
+from twisted.internet import reactor, protocol
+import twisted.words.im.tocsupport as ts
+
 import larvotto.response
 import time
 
-class MarkovBot(TocTalk):
-	"""Handles all IM connection issues"""
+class MarkovBot(toc.TOCClient):
+	"""
+    Handles all IM connection and event issues
+	Also, twisted is lame and won't give you access to the object that it
+	constructs, this is why the __call__ method is override to simulate a
+    constructor
+	"""
 
 	_resp=None
 
-	def __init__(self,scnname,passwd,response):
-		"""
-		@param scnname: AIM Screen Name
-		@param passwd: AIM password
-		@param markov:
-		"""
+	def __init__(self,response):
 		assert isinstance(response,larvotto.response.BaseResponse)
-		TocTalk.__init__(self,scnname,passwd)
 		self._resp=response
 
+	def __call__(self,*args,**kwargs):
+		toc.TOCClient.__init__(self,*args,**kwargs)
+		return self
 
-	def on_IM_IN(self,data):
+	def hearMessage(self,username, message, autoreply):
 		#Override base class method
-		self.do_SEND_IM(self._resp.get(*date.split(':')))
+		self.say(username,self._resp.get(username,message))
 
 
 def Start(ScreenName,Passwd,ResponseObj):
 	"""Starts the bot"""
-	b=MarkovBot(ScreenName,Passwd,ResponseObj)
-	bm=BotManager()
-	bm.addBot(b,"MarkovBot")
-	time.sleep(4)  # time to login
-	b.go()
+	cc = protocol.ClientCreator(reactor, MarkovBot(ResponseObj), ScreenName, Passwd)
+	cc.connectTCP("toc.oscar.aol.com", 9898)
+	reactor.run()
+

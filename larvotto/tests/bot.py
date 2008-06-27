@@ -9,12 +9,12 @@ class TestMarkovBot(unittest.TestCase):
 
 
     def setUp(self):
-		self.bot=MarkovBot('foo','bar',larvotto.response.Echo())
+		self.bot=MarkovBot(larvotto.response.Echo())
 
 
     def testInit(self):
         if __debug__:
-			self.assertRaises(AssertionError, larvotto.bot.MarkovBot,'','',None)
+			self.assertRaises(AssertionError, larvotto.bot.MarkovBot,None)
 
 
 
