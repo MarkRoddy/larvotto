@@ -22,7 +22,8 @@ def PidginLogs(LogDir):
 				if t:
 					messages.append(t)
 				elif not _IsSystemMessage(rec):
-					raise ValueError("malformed log record '%s' in file '%s'"%(rec,logf))
+					pass
+					#raise ValueError("malformed log record '%s' in file '%s'"%(rec,logf))
 	return messages
 
 
@@ -37,6 +38,22 @@ def _ParsePidginRecord(recordtext,dayofyear):
 		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %H:%M:%S')
 	return (dtime,scrnname,msg,)
 
+_SysMsgSuffixes=[
+	'has signed off.',
+	'has signed on.',
+	'logged out.',
+	'logged in.',
+	'is no longer idle.',
+	'has become idle.',
+	'has gone away.',
+	'is no longer away.',
+	'entered the room.',
+	'left the room.',
+	]
+
 def _IsSystemMessage(recordtext):
 	recordtext=recordtext.strip()
-	return recordtext.endswith('has signed off.') or recordtext.endswith('logged out.') or recordtext.endswith('logged in.')
+	for sfx in _SysMsgSuffixes:
+		if recordtext.endswith(sfx):
+			return True
+	return False
