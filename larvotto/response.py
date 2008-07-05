@@ -57,7 +57,7 @@ class MarkovChain(BaseResponse):
 	def get(self,scnname,msg):
 		resp=list(random.choice(self.wordmap.keys()))
 		if self._precision!=len(resp):
-			return resp
+			return ' '.join(resp)
 		else:
 			newword=random.choice(self.wordmap[tuple(resp[-self._precision:])])
 			while newword:
