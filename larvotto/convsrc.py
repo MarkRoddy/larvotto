@@ -38,4 +38,5 @@ def _ParsePidginRecord(recordtext,dayofyear):
 	return (dtime,scrnname,msg,)
 
 def _IsSystemMessage(recordtext):
+	recordtext=recordtext.strip()
 	return recordtext.endswith('has signed off.')
