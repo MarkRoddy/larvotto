@@ -39,4 +39,4 @@ def _ParsePidginRecord(recordtext,dayofyear):
 
 def _IsSystemMessage(recordtext):
 	recordtext=recordtext.strip()
-	return recordtext.endswith('has signed off.')
+	return recordtext.endswith('has signed off.') or recordtext.endswith('logged out.') or recordtext.endswith('logged in.')

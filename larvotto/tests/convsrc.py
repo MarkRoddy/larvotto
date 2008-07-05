@@ -29,8 +29,17 @@ class TestPidginLogs(unittest.TestCase):
 		msg='(1:42:07 PM) AIMsweringMachin has signed off.'
 		self.assert_(larvotto.convsrc._IsSystemMessage(msg))
 
+
+	def testLoggedOffSystemMessage(self):
+		msg='(04:34:28) Ahs123 logged out.'
+		self.assert_(larvotto.convsrc._IsSystemMessage(msg))
+
 	def testSignOffSystemMessageWithWhiteSapce(self):
 		msg='(1:42:07 PM) AIMsweringMachin has signed off.   '
+		self.assert_(larvotto.convsrc._IsSystemMessage(msg))
+
+	def testLoggedInSystemMessage(self):
+		msg='(00:51:44) Ahs123 logged in.'
 		self.assert_(larvotto.convsrc._IsSystemMessage(msg))
 
 
