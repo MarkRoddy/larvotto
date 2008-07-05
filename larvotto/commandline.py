@@ -34,5 +34,11 @@ def main():
 			altscn=opts.altscn
 		else:
 			altscn=screenname
+		print "Loading log files... ",
 		records=larvotto.convsrc.PidginLogs(opts.logsource+os.sep+altscn)
-		larvotto.bot.Start(screenname, passwd, larvotto.response.MarkovChain(altscn,records,opts.chainlen))
+		print "Done."
+		print "Seeding markov chain... ",
+		resp=larvotto.response.MarkovChain(altscn,records,opts.chainlen)
+		print "Done."
+		print "Starting AIM Bot"
+		larvotto.bot.Start(screenname, passwd, resp)
