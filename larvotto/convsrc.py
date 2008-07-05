@@ -21,7 +21,7 @@ def PidginLogs(LogDir):
 				t=_ParsePidginRecord(rec,doy)
 				if t:
 					messages.append(t)
-				elif not _IsSystemMessage(r):
+				elif not _IsSystemMessage(rec):
 					raise ValueError("malformed log record '%s' in file '%s'"%(rec,logf))
 	return messages
 
