@@ -2,7 +2,13 @@
 
 from twisted.words.protocols import oscar
 from twisted.internet import reactor, protocol
+
+import warnings
+warnings.filterwarnings("ignore",module="twisted.words.im")
+
 import twisted.words.im.tocsupport as ts
+
+warnings.resetwarnings()
 
 import larvotto.response
 import time
@@ -43,7 +49,7 @@ class MarkovBot(oscar.BOSConnection):
 		self.clientReady()
 
 
-def Start(ScreenName,Passwd,ResponseObj):
+def Start(ScreenName,Passwd,LogSource,ResponseObj):
 	"""Starts the bot"""
 	class OA(oscar.OscarAuthenticator):
 	   BOSClass = MarkovBot(ResponseObj)
