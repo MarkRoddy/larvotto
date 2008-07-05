@@ -31,7 +31,7 @@ class MarkovChain(BaseResponse):
 		"""
 		ConvoRecords is a list of tuples in the form of (datetime,screenname,message)
 		"""
-		self._buildmap([r for r in ConvoRecords if r[1]==ScreenName], precision)
+		self._buildmap([r for r in ConvoRecords if r[1].upper()==ScreenName.upper()], precision)
 		self._screenname=ScreenName
 		self._precision=precision
 
