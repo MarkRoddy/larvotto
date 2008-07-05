@@ -6,13 +6,20 @@ import larvotto.response
 import larvotto.convsrc
 from optparse import OptionParser
 from getpass import getpass
-import sys
+import sys,os
 
 def main():
 	"""Runs the Larvotto bot"""
+	if sys.platform[:4]=='win':
+		logsrc='C:\\Documents and Settings\\%s\\Application Data\\.purple\\logs\\aim'
+	else:
+		logsrc='/home/%s/.purple/logs/aim'
+	logsrc=logsrc%os.environ['USERNAME']
 	p=OptionParser(usage='%prog [options] screenname',version='%progv'+larvotto.__version__)
 	p.add_option('-p','--password',dest='passwd',default='',help='Specify Password at Commandline')
-	p.add_option('-l','--logsource',dest='logsource',default='C:\Documents and Settings\Jean\Application Data\.purple\logs\\aim\sketchyd1',help='Please provide the path to the log files to train from')
+	p.add_option('-l','--logsource',dest='logsource',default=logsrc,help='Path to Pidgin log files to train from')
+	p.add_option('-c','--chain-length',dest='chainlen',default=2,help='Length of the markov chain used')
+	p.add_option('-a','--alt-screenname',dest='altscn',default='',help="Username who's logged messages seed the markov chain.")
 	(opts,args)=p.parse_args()
 	if 1!=len(args):
 		p.print_help()
@@ -22,5 +29,10 @@ def main():
 			passwd=opts.passwd
 		else:
 			passwd=getpass('Password: ')
-		records = larvotto.convsrc.PidginLogs(opts.logsource)
-		larvotto.bot.Start(args[0],passwd,larvotto.response.MarkovChain(records))
+		screenname=args[0]
+		if opts.altscn:
+			altscn=opts.altscn
+		else:
+			altscn=screenname
+		records=larvotto.convsrc.PidginLogs(opts.logsource+os.sep+altscn)
+		larvotto.bot.Start(screenname, passwd, larvotto.response.MarkovChain(altscn,records,opts.chainlen))
