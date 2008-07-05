@@ -19,9 +19,9 @@ def PidginLogs(LogDir):
 			logf=d+os.sep+logf
 			for rec in [r for r in open(logf).readlines()[1:] if not _IsSystemMessage(r)]:
 				t=_ParsePidginRecord(rec,doy)
-                if t:
-                    messages.append(t)
-                else:
+				if t:
+					messages.append(t)
+				else:
 					raise ValueError("malformed log record '%s' in file '%s'"%(rec.strip(),logf))
 	return messages
 
