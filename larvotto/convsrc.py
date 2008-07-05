@@ -22,7 +22,7 @@ def PidginLogs(LogDir):
                 if t:
                     messages.append(t)
                 else:
-					raise ValueError("malformed log record '%s' in file '%s'"%(recordtext.strip(),logf))
+					raise ValueError("malformed log record '%s' in file '%s'"%(rec.strip(),logf))
 	return messages
 
 
