@@ -7,7 +7,7 @@ All functions return an interable whose items are tuples in the form of:
 import os,re
 from datetime import datetime
 
-recordre=re.compile(r'^\((\d\d?\:\d\d\:\d\d\s+[A|P]M)\)\s+(.*?)\:\s+(.*)\s*$', re.I|re.L)
+recordre=re.compile(r'^\((\d\d?\:\d\d\:\d\d(\s+[A|P]M)?)\)\s+(.*?)\:\s+(.*)\s*$', re.I|re.L)
 
 def PidginLogs(LogDir):
 	"""Returns all conversations by parsing Pidgin log files"""
@@ -23,9 +23,12 @@ def PidginLogs(LogDir):
 
 
 def _ParsePidginRecord(recordtext,dayofyear):
-	m=recordre.search(recordtext.strip()) 
+	m=recordre.search(recordtext.strip())
 	if not m:
 		raise ValueError("malformed log record: '%s'"%recordtext.strip())
-	tod,scrnname,msg=m.groups()
-	dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S %p')	
+	tod,isampm,scrnname,msg=m.groups()
+	if isampm:
+		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S %p')	
+	else:
+		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S')
 	return (dtime,scrnname,msg,)

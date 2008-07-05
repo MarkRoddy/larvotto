@@ -19,5 +19,11 @@ class TestPidginLogs(unittest.TestCase):
 		larvotto.convsrc._ParsePidginRecord(record,d)
 
 
+	def testNoAMPM(self):
+		record='(04:20:45) MyScreeName: those are some tasty burgers'
+		d='2008-07-05'
+		larvotto.convsrc._ParsePidginRecord(record,d)
+
+
 if __name__=='__main__':
 	unittest.main()
