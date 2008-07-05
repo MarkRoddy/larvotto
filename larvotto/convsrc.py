@@ -34,5 +34,5 @@ def _ParsePidginRecord(recordtext,dayofyear):
 	if isampm:
 		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S %p')	
 	else:
-		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S')
+		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %H:%M:%S')
 	return (dtime,scrnname,msg,)
