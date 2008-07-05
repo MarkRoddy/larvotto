@@ -22,5 +22,6 @@ test:
 	$(PYTHON) larvotto/tests/convsrc.py
 
 clean:
-	$(RM) -r *~ dist MANIFEST
-	$(FIND) -name  \*.pyc -delete
+	$(RM) -r  dist MANIFEST
+	$(FIND) \( -name  \*.pyc -o -name \*~ \) -delete
+
