@@ -10,7 +10,7 @@ import sys,os
 
 def main():
 	"""Runs the Larvotto bot"""
-	if sys.platform[:4]=='win':
+	if sys.platform[:3]=='win':
 		logsrc='C:\\Documents and Settings\\%s\\Application Data\\.purple\\logs\\aim'
 	else:
 		logsrc='/home/%s/.purple/logs/aim'
