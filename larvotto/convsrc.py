@@ -17,7 +17,7 @@ def PidginLogs(LogDir):
 		for logf in os.listdir(d):
 			doy=logf.split('.')[0]
 			logf=d+os.sep+logf
-			for rec in open(logf).readlines()[1:]:
+			for rec in [r for r in open(logf).readlines()[1:] if not _IsSystemMessage(r)]:
 				t=_ParsePidginRecord(rec,doy)
                 if t:
                     messages.append(t)
@@ -36,3 +36,6 @@ def _ParsePidginRecord(recordtext,dayofyear):
 	else:
 		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %H:%M:%S')
 	return (dtime,scrnname,msg,)
+
+def _IsSystemMessage(recordtext):
+	return recordtext.endswith('has signed off.')
