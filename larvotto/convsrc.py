@@ -18,14 +18,18 @@ def PidginLogs(LogDir):
 			doy=logf.split('.')[0]
 			logf=d+os.sep+logf
 			for rec in open(logf).readlines()[1:]:
-				messages.append(_ParsePidginRecord(rec,doy))
+				t=_ParsePidginRecord(rec,doy)
+                if t:
+                    messages.append(t)
+                else:
+					raise ValueError("malformed log record '%s' in file '%s'"%(recordtext.strip(),logf))
 	return messages
 
 
 def _ParsePidginRecord(recordtext,dayofyear):
 	m=recordre.search(recordtext.strip())
 	if not m:
-		raise ValueError("malformed log record: '%s'"%recordtext.strip())
+		return
 	tod,isampm,scrnname,msg=m.groups()
 	if isampm:
 		dtime=datetime.strptime('%s %s'%(dayofyear,tod), '%Y-%m-%d %I:%M:%S %p')	
