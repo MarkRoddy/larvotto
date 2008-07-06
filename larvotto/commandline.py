@@ -18,7 +18,7 @@ def main():
 	p=OptionParser(usage='%prog [options] screenname',version='%progv'+larvotto.__version__)
 	p.add_option('-p','--password',dest='passwd',default='',help='Specify Password at Commandline')
 	p.add_option('-l','--logsource',dest='logsource',default=logsrc,help='Path to Pidgin log files to train from')
-	p.add_option('-c','--chain-length',dest='chainlen',default=2,help='Length of the markov chain used')
+	p.add_option('-c','--chain-length',dest='chainlen',default=2,type='int',help='Length of the markov chain used')
 	p.add_option('-a','--alt-screenname',dest='altscn',default='',help="Username who's logged messages seed the markov chain.")
 	(opts,args)=p.parse_args()
 	if 1!=len(args):
