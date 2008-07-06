@@ -13,7 +13,7 @@ install: setup.py
 	$(PYTHON) setup.py install
 
 installer:
-	$(PYTHON) setup.py -q sdist --format=gztar
+	$(PYTHON) setup.py -q sdist --format=zip
 
 test:
 	$(PYTHON) larvotto/tests/bot.py
