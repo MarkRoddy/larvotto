@@ -5,7 +5,7 @@ from distutils.core import setup
 import larvotto
 
 
-setup(name='Larvotto',
+setup(name='larvotto',
       version=larvotto.__version__,
       url=larvotto.__url__,
       license=larvotto.__license__,
