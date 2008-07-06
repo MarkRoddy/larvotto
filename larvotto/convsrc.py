@@ -22,8 +22,9 @@ def PidginLogs(LogDir):
 				if t:
 					messages.append(t)
 				elif not _IsSystemMessage(rec):
-					#Handle in future, Probably an older log format
 					pass
+					#print "malformed log record '%s'"%rec
+					#raise ValueError("malformed log record '%s' in file '%s'"%(rec,logf))
 	return messages
 
 
@@ -57,3 +58,15 @@ def _IsSystemMessage(recordtext):
 		if recordtext.endswith(sfx):
 			return True
 	return False
+	
+#def _loadmap(self, filename):
+	#each entry in the word map is a (precision+1)-tuple
+	#each word of the precision, plus the number of occurrences
+	#wordmap={}
+	
+	# when using the new, loaded map, use (precision-1) tokens, and get the possible next ones and their frequency, and randomly choose one given the frequency
+	
+	#self._precision= FROM FILE
+	
+	#for line in file 
+	#	
