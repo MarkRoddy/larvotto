@@ -45,23 +45,20 @@ class MarkovChain(BaseResponse):
 
 	@staticmethod
 	def _addSentenceToMap(wordmap, words, precision):
-		if precision< len(words):
-			i=0
-			while (i+precision) < len(words):
-				wordmap.setdefault(tuple(words[i:i+precision]),[]).append(words[i+precision])
-				i+=1
-			wordmap.setdefault(tuple(words[-precision:]),[]).append(None)
-		else:
-			wordmap[tuple(words)]=[None]
+		wordst=[None,]*precision
+		wordst.extend(words)
+		words=wordst
+		i=0
+		while (i+precision) < len(words):
+			wordmap.setdefault(tuple(words[i:i+precision]),[]).append(words[i+precision])
+			i+=1
+		wordmap.setdefault(tuple(words[-precision:]),[]).append(None)
 
 
 	def get(self,scnname,msg):
-		resp=list(random.choice(self.wordmap.keys()))
-		if self._precision!=len(resp):
-			return ' '.join(resp)
-		else:
+		resp=[None,]*self._precision
+		newword=random.choice(self.wordmap[tuple(resp[-self._precision:])])
+		while newword:
 			newword=random.choice(self.wordmap[tuple(resp[-self._precision:])])
-			while newword:
-				newword=random.choice(self.wordmap[tuple(resp[-self._precision:])])
-				resp.append(newword)
+			resp.append(newword)
 		return ' '.join([w for w in resp if w])
