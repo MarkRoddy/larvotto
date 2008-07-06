@@ -46,7 +46,7 @@ class MarkovTest(unittest.TestCase):
 			wordlist=wordmap[chain]
 			self.assert_(isinstance(wordlist,list))
 			for val in wordlist:
-				self.assert_(val is None or isinstance(val,basestring))
+				self.assert_(val is None or isinstance(val,basestring), str(type(val)))
 		self.assertEquals(wordmap[('hello','this')], ['is'])
 		self.assertEquals(wordmap[('parsed','again')],[None])
 		self.assertEquals(wordmap[('should','be')],['parsed',]*2)
