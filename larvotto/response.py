@@ -38,7 +38,8 @@ class MarkovChain(BaseResponse):
 	def _buildmap(self, records, precision):
 		wordmap={}
 		for r in records:
-			self._addSentenceToMap(wordmap, r[2].split(), precision)
+			words=r[2].lower().split()
+			self._addSentenceToMap(wordmap, words, precision)
 				
 		self.wordmap=wordmap
 
