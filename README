@@ -9,13 +9,12 @@ Installing
 
 Note that Larvotto requires Python and the Twisted (http://twistedmatrix.com/trac/)
 networking libary.  If you install Twisted using a packaging system such as apt or
-yum, then make sure you have the twisted.words library installed in addition to the
+yum, the make sure you have the twisted.words library installed in addition to the
 twisted base.
 
 
 Usage
 larvotto [-p password] [-l logdir] [-c chainlen] [-a altscrnm] screenname
-
 
 -p password: Specify the password at the command line instead of being prompted
 immediately following bot start
@@ -24,8 +23,8 @@ immediately following bot start
 For Windows users, this defaults to $HOME\Application Data\.purple\logs\aim
 For *nix users, this defaults to $HOME/.purple/logs/aim
 
--c chainlen: The number of words to be used in the markov chain.  This is the number of words in each response that have a statistical correlation to each other.  A smaller number
-can result in nonsensical responses and a higher number could result in a simple 
+-c chainlen: The number of words to be used in the markov chain.  A smaller number
+can result in nonsensical data and a higher number could result in a simple 
 repetition of your previous statements.  These results can vary drasticly depending
 on the size of your log files.  Our experimentation has shown a value of two or
 three to perform well, but you should experiment yourself and have fun!
