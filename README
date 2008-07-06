@@ -35,3 +35,5 @@ useful for the case in which you don't want the bot to log in as your primary
 screen name, but you want to base its text on your previous conversations using
 that name.
 
+screenname: The AOL Instant Messanger screen name that the bot will use to log in
+
