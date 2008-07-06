@@ -1,4 +1,4 @@
-Larvotto is an AOL instant messanger bot that utilizes markov chains 
+Larvotto is an AOL instant messenger bot that utilizes Markov chains 
 seeded with logs of previous instant message conversations to generate
 response text to incoming instant messages.  
 http://code.google.com/p/larvotto/
@@ -8,7 +8,7 @@ Installing
 > python setup.py install
 
 Note that Larvotto requires Python and the Twisted (http://twistedmatrix.com/trac/)
-networking libary.  If you install Twisted using a packaging system such as apt or
+networking library.  If you install Twisted using a packaging system such as apt or
 yum, the make sure you have the twisted.words library installed in addition to the
 twisted base.
 
@@ -25,7 +25,7 @@ For *nix users, this defaults to $HOME/.purple/logs/aim
 
 -c chainlen: The number of words to be used in the markov chain.  A smaller number
 can result in nonsensical data and a higher number could result in a simple 
-repetition of your previous statements.  These results can vary drasticly depending
+repetition of your previous statements.  These results can vary drastically depending
 on the size of your log files.  Our experimentation has shown a value of two or
 three to perform well, but you should experiment yourself and have fun!
 
@@ -35,19 +35,19 @@ useful for the case in which you don't want the bot to log in as your primary
 screen name, but you want to base its text on your previous conversations using
 that name.
 
-screenname: The AOL Instant Messanger screen name that the bot will use to log in
+screenname: The AOL Instant Messenger screen name that the bot will use to log in
 
 
 
 Implementation Notes
 To generate text to send via instant messages, Larvotto parses a users Pidgin
-log files to build up a list of uterences previously issued by the user.  This
+log files to build up a list of utterances previously issued by the user.  This
 body of text is then used to seed a Markov Chain used to generate "realistic" 
 text.  When an incoming message is received, a sentence is generated using the
 markvo chain and returned to the recipient.  The chain length command line 
-argument specifies the length of the chain, or more specificly, given X words
+argument specifies the length of the chain, or more specifically, given X words
 what words have followed them and how often.  This is why a lower chain length
 is more likely to result in gibberish and a longer length can result in a 
-simple repition of sentences from the log files.
+simple repetition of sentences from the log files.
 
 
