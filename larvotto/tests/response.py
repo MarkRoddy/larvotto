@@ -35,6 +35,14 @@ class MarkovTest(unittest.TestCase):
 		self.assertNotEquals(0, len(resp))
 
 
+	def testAddSentenceToMap(self):
+		words='Hello this is a sentence that should be parsed repeat should be parsed again'.lower().split()
+		wordmap={}
+		larvotto.response.MarkovChain._addSentenceToMap(wordmap, words, 2)
+		self.assertEquals(wordmap[('hello','this')], ['is'])
+		self.assertEquals(wordmap[('parsed','again')],[None])
+		self.assertEquals(wordmap[('should','be')],['parsed',]*2)
+		self.assertEquals(wordmap[('be','parsed')],['repeat','again'])
 
 
 if __name__=='__main__':
