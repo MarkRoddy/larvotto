@@ -45,13 +45,9 @@ class MarkovChain(BaseResponse):
 
 	@staticmethod
 	def _addSentenceToMap(wordmap, words, precision):
-		wordst=[None,]*precision
-		wordst.extend(words)
-		words=wordst
-		i=0
-		while (i+precision) < len(words):
+		words=[None,]*precision+words
+		for i in xrange(0,len(words)-precision):
 			wordmap.setdefault(tuple(words[i:i+precision]),[]).append(words[i+precision])
-			i+=1
 		wordmap.setdefault(tuple(words[-precision:]),[]).append(None)
 
 
