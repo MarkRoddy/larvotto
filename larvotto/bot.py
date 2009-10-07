@@ -1,15 +1,24 @@
 """Implements the instant messager bot that handles communication"""
 
-from twisted.words.protocols import oscar
-from twisted.internet import reactor, protocol
+
+
 
 import warnings
+
+#Twisted warns as it's claiming to be re-writing
+#twistied.words.im at some point soon, it has been doing so
+#for several 
 warnings.filterwarnings("ignore",module="twisted.words.im")
-
 import twisted.words.im.tocsupport as ts
-
 warnings.resetwarnings()
 
+#Indirect warning as 'oscar' imports md5 which
+#is deprecated in Python v2.6
+warnings.filterwarnings("ignore",module="twisted.words.protocols",category=DeprecationWarning)
+from twisted.words.protocols import oscar
+warnings.resetwarnings()
+
+from twisted.internet import reactor, protocol
 import larvotto.response
 import time
 
