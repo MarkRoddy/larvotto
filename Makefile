@@ -16,10 +16,10 @@ installer:
 	$(PYTHON) setup.py -q sdist --format=zip
 
 test:
-	$(PYTHON) larvotto/tests/bot.py
-	$(PYTHON) larvotto/tests/response.py
-	$(PYTHON) larvotto/tests/commandline.py
-	$(PYTHON) larvotto/tests/convsrc.py
+	$(PYTHON) larvotto/tests/tests_bot.py
+	$(PYTHON) larvotto/tests/tests_response.py
+	$(PYTHON) larvotto/tests/tests_commandline.py
+	$(PYTHON) larvotto/tests/tests_convsrc.py
 
 clean:
 	$(RM) -r  dist MANIFEST
